@@ -30,4 +30,4 @@ if usr_extention.lower() == "y":
     print(Fore.BLACK + Back.GREEN + " Converted to mp3 ")
 
 else:
-    print(Fore.BLACK + Back.GREEN + " Completed ")
+    print(Fore.BLACK + Back.GREEN + " Request completed ")
