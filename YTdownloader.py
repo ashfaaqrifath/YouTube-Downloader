@@ -10,7 +10,7 @@ def mp3Convert(filename):
     video.close()
 
 
-SAVE_PATH = "G:/My Drive/YT downloader"
+SAVE_PATH = "file path goes here."
 
 getLink = input(Fore.GREEN + "Enter YouTube link: ")
 usr_extention = input(Fore.MAGENTA + "Do you want to convert to mp3 format: ")
@@ -20,10 +20,12 @@ print(Fore.BLACK + Back.YELLOW + f" Video Title: {dwnld_file.title} ")
 
 for stream in dwnld_file.streams:
     print(Fore.CYAN + str(stream))
-
+    
+#gets the lowest resolution (this can be changed)
 dwnld_file = dwnld_file.streams.get_lowest_resolution()
 test = dwnld_file.download(SAVE_PATH)
 
+#converts downloaded file to mp3 format (does not overwrite)
 if usr_extention.lower() == "y":
     mp3Convert(test)
     print(Fore.BLACK + Back.GREEN + " Converted to mp3 ")
