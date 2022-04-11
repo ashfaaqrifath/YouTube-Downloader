@@ -20,14 +20,13 @@ print(Fore.BLACK + Back.YELLOW + f" Video Title: {dwnld_file.title} ")
 
 for stream in dwnld_file.streams:
     print(Fore.CYAN + str(stream))
-    
-#gets the lowest resolution (this can be changed)
-dwnld_file = dwnld_file.streams.get_lowest_resolution()
-test = dwnld_file.download(SAVE_PATH)
 
-#converts downloaded file to mp3 format (does not overwrite)
+dwnld_file = dwnld_file.streams.get_lowest_resolution()
+fileConvert = dwnld_file.download(SAVE_PATH)
+
 if usr_extention.lower() == "y":
-    mp3Convert(test)
+    mp3Convert(fileConvert)
+    os.remove(fileConvert)
     print(Fore.BLACK + Back.GREEN + " Converted to mp3 ")
 
 else:
