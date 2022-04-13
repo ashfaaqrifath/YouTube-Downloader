@@ -1,39 +1,61 @@
 from pytube import YouTube
+from pytube import Playlist
 from moviepy.editor import VideoFileClip
-import colorama
-from colorama import Fore, Back
-colorama.init(autoreset=True)
-
-def mp3Convert(filename):
-    video = VideoFileClip(filename)
-    video.audio.write_audiofile(filename[:-4] + ".mp3")
-    video.close()
-
-print('''
-░█──░█ ▀▀█▀▀ 　 ░█▀▀▄ ░█▀▀▀█ ░█──░█ ░█▄─░█ ░█─── ░█▀▀▀█ ─█▀▀█ ░█▀▀▄ ░█▀▀▀ ░█▀▀█ 
-░█▄▄▄█ ─░█── 　 ░█─░█ ░█──░█ ░█░█░█ ░█░█░█ ░█─── ░█──░█ ░█▄▄█ ░█─░█ ░█▀▀▀ ░█▄▄▀ 
-──░█── ─░█── 　 ░█▄▄▀ ░█▄▄▄█ ░█▄▀▄█ ░█──▀█ ░█▄▄█ ░█▄▄▄█ ░█─░█ ░█▄▄▀ ░█▄▄▄ ░█─░█ v1.0.1
-                          Copyright (c) Ashfaaq Rifath 2022''')
+import os
+import tkinter as tk
+from tkinter import *
+from tkinter import messagebox, filedialog
 
 
-SAVE_PATH = "file path goes here."
+def elements():
 
-getLink = input(Fore.GREEN + "Enter YouTube link: ")
-usr_extention = input(Fore.MAGENTA + "Do you want to convert to mp3 format (y/n): ")
-dwnld_file = YouTube(getLink)
+    app_banner = Label(root, text="YouTube Downloader", padx=15, pady=15, font="Rubik 14", fg="red")
+    app_banner.grid(row=1, column=1, pady=10, padx=5, columnspan=3)
+    
+    # copyright_label = Label(root, text="Copyright © Ashfaaq Rifath 2022", padx=50, pady=50, font="Rubik 14", fg="black")
+    # copyright_label.grid(row=1, column=2, pady=10, padx=5, columnspan=3)
 
-print(Fore.BLACK + Back.YELLOW + f" Video Title: {dwnld_file.title} ")
+    root.ytLink = Entry(root, width=35, textvariable=getLink, font="Rubik 14")
+    root.ytLink.insert(0, "Enter YouTube link")
+    root.ytLink.grid(row=2, column=1, pady=5, padx=5, columnspan=2)
 
-for stream in dwnld_file.streams:
-    print(Fore.CYAN + str(stream))
+    root.dwnld_path = Entry(root, width=27, textvariable=download_path, font="Rubik")
+    root.dwnld_path.insert(0, "Download Folder")
+    root.dwnld_path.grid(row=3, column=1, pady=5, padx=5)
 
-dwnld_file = dwnld_file.streams.get_lowest_resolution()
-fileConvert = dwnld_file.download(SAVE_PATH)
+    fileBrowse = Button(root, text="Browse", command=browseFile, width=10,)
+    fileBrowse.grid(row=3, column=2, pady=1, padx=1)
 
-if usr_extention.lower() == "y":
-    mp3Convert(fileConvert)
-    os.remove(fileConvert)
-    print(Fore.BLACK + Back.GREEN + " Converted to mp3 ")
+    download_button = Button(root, text="Download", command=downloadVideo, width=20, pady=10, padx=15, font="Rubik")
+    download_button.grid(row=4, column=1, pady=20, padx=20)
 
-else:
-    print(Fore.BLACK + Back.GREEN + " Request completed ")
+
+def browseFile():
+
+    save_path = filedialog.askdirectory()
+    download_path.set(save_path)
+
+
+def downloadVideo():
+
+    youtube_link = getLink.get()
+    download_folder = download_path.get()
+    dwnld_file = YouTube(youtube_link)
+    quality = dwnld_file.streams.get_lowest_resolution()
+    quality.download(download_folder)
+
+    messagebox.showinfo("Download Success")
+
+
+root = tk.Tk()
+
+root.geometry("520x280")
+root.resizable(0, 0)
+root.title("YouTube Downloader")
+
+getLink = StringVar()
+download_path = StringVar()
+
+elements()
+
+root.mainloop()
