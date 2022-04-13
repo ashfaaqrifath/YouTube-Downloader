@@ -35,11 +35,6 @@ A simple Python script that is able to download YouTube videos or playlists and 
 - Playlists download
 - Display all streams
 - GUI
-
-
-## Installation
-
-Download the 'YTdownloader.exe' file to start using this tool.
     
 ## Badges
 
