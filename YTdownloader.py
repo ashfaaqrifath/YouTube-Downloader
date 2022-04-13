@@ -9,6 +9,12 @@ def mp3Convert(filename):
     video.audio.write_audiofile(filename[:-4] + ".mp3")
     video.close()
 
+print('''
+░█──░█ ▀▀█▀▀ 　 ░█▀▀▄ ░█▀▀▀█ ░█──░█ ░█▄─░█ ░█─── ░█▀▀▀█ ─█▀▀█ ░█▀▀▄ ░█▀▀▀ ░█▀▀█ 
+░█▄▄▄█ ─░█── 　 ░█─░█ ░█──░█ ░█░█░█ ░█░█░█ ░█─── ░█──░█ ░█▄▄█ ░█─░█ ░█▀▀▀ ░█▄▄▀ 
+──░█── ─░█── 　 ░█▄▄▀ ░█▄▄▄█ ░█▄▀▄█ ░█──▀█ ░█▄▄█ ░█▄▄▄█ ░█─░█ ░█▄▄▀ ░█▄▄▄ ░█─░█ v1.0.1
+                          Copyright (c) Ashfaaq Rifath 2022''')
+
 
 SAVE_PATH = "file path goes here."
 
