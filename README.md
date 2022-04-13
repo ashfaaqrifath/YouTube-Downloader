@@ -46,7 +46,7 @@ WARNING: DOWNLOADING COPYRIGHTED MATERIAL IS ILLEGAL! I DO NOT TAKE ANY RESPONSI
 
 ## License
 
-Copyright © 2022 Ashfaaq Rifath - YouTube-Downloader v1.0.1 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs) 
+Copyright © 2022 Ashfaaq Rifath [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs) 
 
 
 ##
