@@ -7,55 +7,161 @@ from tkinter import *
 from tkinter import messagebox, filedialog
 
 
+root = tk.Tk()
+root.geometry("520x280")
+root.resizable(False, False)
+root.title("YouTube Downloader v3.0.0")
+root.config(background="PaleGreen1")
+
+
+def makeMenu(w):
+
+    global the_menu
+    the_menu = tk.Menu(w, tearoff=0)
+    the_menu.add_command(label="Copy")
+    the_menu.add_command(label="Paste")
+
+
+def click_menu(e):
+
+    w = e.widget
+    the_menu.entryconfigure("Copy",
+    command=lambda: w.event_generate("<<Copy>>"))
+
+    the_menu.entryconfigure("Paste",
+    command=lambda: w.event_generate("<<Paste>>"))
+
+    the_menu.tk.call("tk_popup", the_menu, e.x_root, e.y_root)
+
+
+
 def elements():
 
-    app_banner = Label(root, text="YouTube Downloader", padx=15, pady=15, font="Rubik 14", fg="red")
-    app_banner.grid(row=1, column=1, pady=10, padx=5, columnspan=3)
-    
-    # copyright_label = Label(root, text="Copyright © Ashfaaq Rifath 2022", padx=50, pady=50, font="Rubik 14", fg="black")
-    # copyright_label.grid(row=1, column=2, pady=10, padx=5, columnspan=3)
+    app_banner = Label(root, text="YouTube Downloader",
+                        padx=15,
+                        pady=15,
+                        font="SegoeUI 14",
+                        bg="palegreen1",
+                        fg="red")
+    app_banner.grid(row=1,
+                    column=1,
+                    pady=10,
+                    padx=5,
+                    columnspan=3)
 
-    root.ytLink = Entry(root, width=35, textvariable=getLink, font="Rubik 14")
-    root.ytLink.insert(0, "Enter YouTube link")
-    root.ytLink.grid(row=2, column=1, pady=5, padx=5, columnspan=2)
+    yt_link = Label(root,
+                        text="Enter link :",
+                        bg="salmon",
+                        pady=5,
+                        padx=5)
+    yt_link.grid(row=2,
+                    column=0,
+                    pady=5,
+                    padx=5)
 
-    root.dwnld_path = Entry(root, width=27, textvariable=download_path, font="Rubik")
-    root.dwnld_path.insert(0, "Download Folder")
-    root.dwnld_path.grid(row=3, column=1, pady=5, padx=5)
+    root.linkText = Entry(root,
+                            width=35,
+                            textvariable=link_entry,
+                            font="Arial 14")
+    #tkinter copy paste
+    root.linkText.bind_class("Entry", "<Button-3><ButtonRelease-3>", click_menu)
+    root.linkText.grid(row=2,
+                        column=1,
+                        pady=5,
+                        padx=5,
+                        columnspan=2)
 
-    fileBrowse = Button(root, text="Browse", command=browseFile, width=10,)
-    fileBrowse.grid(row=3, column=2, pady=1, padx=1)
+    folder_label = Label(root,
+                            text="Folder :",
+                            bg="salmon",
+                            pady=5,
+                            padx=9)
+    folder_label.grid(row=3,
+                        column=0,
+                        pady=5,
+                        padx=5)
 
-    download_button = Button(root, text="Download", command=downloadVideo, width=20, pady=10, padx=15, font="Rubik")
-    download_button.grid(row=4, column=1, pady=20, padx=20)
+    root.file_browse_text = Entry(root,
+                                    width=27,
+                                    textvariable=download_path,
+                                    font="Arial 14")
+    root.file_browse_text.grid(row=3,
+                                column=1,
+                                pady=5,
+                                padx=5)
+
+    file_browse = Button(root,
+                        text="Browse",
+                        command=browse_file,
+                        width=10,
+                        bg="bisque",
+                        relief=GROOVE)
+    file_browse.grid(row=3,
+                    column=2,
+                    pady=1,
+                    padx=1)
+
+    mp4_button = Button(root,
+                        text="Download mp4",
+                        command=download_mp4,
+                        width=10,
+                        bg="thistle1",
+                        pady=10,
+                        padx=15,
+                        relief=GROOVE)
+    mp4_button.grid(row=4,
+                    column=1,
+                    pady=20,
+                    padx=20)
+
+    mp3_button = Button(root,
+                        text="Download mp3",
+                        command=download_mp3,
+                        width=10,
+                        bg="thistle1",
+                        pady=10,
+                        padx=15,
+                        relief=GROOVE)
+    mp3_button.grid(row=4,
+                    column=2,
+                    pady=20,
+                    padx=20)
 
 
-def browseFile():
+def browse_file():
+    download_Directory = filedialog.askdirectory()
+    download_path.set(download_Directory)
 
-    save_path = filedialog.askdirectory()
-    download_path.set(save_path)
 
+def download_mp4():
 
-def downloadVideo():
-
-    youtube_link = getLink.get()
+    youtube_link = link_entry.get()
     download_folder = download_path.get()
-    dwnld_file = YouTube(youtube_link)
-    quality = dwnld_file.streams.get_lowest_resolution()
-    quality.download(download_folder)
+    get_item = YouTube(youtube_link)
+    file_stream = get_item.streams.get_lowest_resolution()
+    file_stream.download(download_folder)
+    messagebox.showinfo("Download Success", f"Downloaded video : {get_item.title}")
 
-    messagebox.showinfo("Download Success")
+
+def download_mp3():
+
+    youtube_link = link_entry.get()
+    download_folder = download_path.get()
+    get_item = YouTube(youtube_link)
+    file_stream = get_item.streams.get_lowest_resolution()
+    file_Convert = file_stream.download(download_folder)
+
+    video = VideoFileClip(file_Convert)
+    video.audio.write_audiofile(file_Convert[:-4] + ".mp3")
+    video.close()
+    os.remove(file_Convert)
+    messagebox.showinfo("Download Success", f"Downloaded audio : {get_item.title}")
 
 
-root = tk.Tk()
-
-root.geometry("520x280")
-root.resizable(0, 0)
-root.title("YouTube Downloader")
-
-getLink = StringVar()
+link_entry = StringVar()
 download_path = StringVar()
 
 elements()
+makeMenu(root)
 
 root.mainloop()
