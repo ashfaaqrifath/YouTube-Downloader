@@ -32,7 +32,7 @@ A simple Python script that is able to download YouTube videos or playlists and 
 
 ## Installation
 
-Download the [YTdownloader.exe](https://github.com/ashfaaqrifath/YouTube-Downloader/releases) file to start using this tool.
+Download the [YTdownloader.exe](https://github.com/ashfaaqrifath/YouTube-Downloader/releases) file to use this tool.
 
 
 ## Features
