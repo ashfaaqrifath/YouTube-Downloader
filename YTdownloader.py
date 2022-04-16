@@ -10,8 +10,8 @@ from tkinter import messagebox, filedialog
 root = tk.Tk()
 root.geometry("520x280")
 root.resizable(False, False)
-root.title("YouTube Downloader v3.0.0")
-root.config(background="PaleGreen1")
+root.title("YouTube Downloader v3.1.0")
+root.config(background="#448080")
 
 
 def makeMenu(w):
@@ -40,9 +40,9 @@ def elements():
     app_banner = Label(root, text="YouTube Downloader",
                         padx=15,
                         pady=15,
-                        font="SegoeUI 14",
-                        bg="palegreen1",
-                        fg="red")
+                        bg="#448080",
+                        fg="white",
+                        font="Magneto 20 bold")
     app_banner.grid(row=1,
                     column=1,
                     pady=10,
@@ -51,9 +51,10 @@ def elements():
 
     yt_link = Label(root,
                         text="Enter link :",
-                        bg="salmon",
+                        bg="#00fbff",
                         pady=5,
-                        padx=5)
+                        padx=5,
+                        font="Arial 10")
     yt_link.grid(row=2,
                     column=0,
                     pady=5,
@@ -73,9 +74,10 @@ def elements():
 
     folder_label = Label(root,
                             text="Folder :",
-                            bg="salmon",
+                            bg="#00fbff",
                             pady=5,
-                            padx=9)
+                            padx=9,
+                            font="Arial 10")
     folder_label.grid(row=3,
                         column=0,
                         pady=5,
@@ -94,7 +96,7 @@ def elements():
                         text="Browse",
                         command=browse_file,
                         width=10,
-                        bg="bisque",
+                        bg="salmon",
                         relief=GROOVE)
     file_browse.grid(row=3,
                     column=2,
@@ -105,10 +107,11 @@ def elements():
                         text="Download mp4",
                         command=download_mp4,
                         width=10,
-                        bg="thistle1",
+                        bg="#1fab00",
                         pady=10,
                         padx=15,
-                        relief=GROOVE)
+                        relief=GROOVE,
+                        font="Arial 10")
     mp4_button.grid(row=4,
                     column=1,
                     pady=20,
@@ -118,10 +121,11 @@ def elements():
                         text="Download mp3",
                         command=download_mp3,
                         width=10,
-                        bg="thistle1",
+                        bg="#ffc800",
                         pady=10,
                         padx=15,
-                        relief=GROOVE)
+                        relief=GROOVE,
+                        font="Arial 10")
     mp3_button.grid(row=4,
                     column=2,
                     pady=20,
@@ -136,10 +140,20 @@ def browse_file():
 def download_mp4():
 
     youtube_link = link_entry.get()
+
+    if "=" in youtube_link:
+        download_folder = download_path.get()
+        playlist = Playlist(youtube_link)
+        for video in playlist.videos:
+            print(video.title)
+            playlist_res = video.streams.get_lowest_resolution()
+            playlist_res.download(download_folder)
+            messagebox.showinfo("Download Success", "Downloaded playlist")
+
     download_folder = download_path.get()
     get_item = YouTube(youtube_link)
-    file_stream = get_item.streams.get_lowest_resolution()
-    file_stream.download(download_folder)
+    file_res = get_item.streams.get_lowest_resolution()
+    file_res.download(download_folder)
     messagebox.showinfo("Download Success", f"Downloaded video : {get_item.title}")
 
 
@@ -148,8 +162,8 @@ def download_mp3():
     youtube_link = link_entry.get()
     download_folder = download_path.get()
     get_item = YouTube(youtube_link)
-    file_stream = get_item.streams.get_lowest_resolution()
-    file_Convert = file_stream.download(download_folder)
+    file_res = get_item.streams.get_lowest_resolution()
+    file_Convert = file_res.download(download_folder)
 
     video = VideoFileClip(file_Convert)
     video.audio.write_audiofile(file_Convert[:-4] + ".mp3")
