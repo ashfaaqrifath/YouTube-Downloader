@@ -38,7 +38,6 @@ Download the [YTdownloader.exe](https://github.com/ashfaaqrifath/YouTube-Downloa
 ## Features
 
 - MP4 to MP3 convertion
-- Playlists download
 - Display all streams
 - GUI
     
