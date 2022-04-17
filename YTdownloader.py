@@ -9,9 +9,12 @@ from tkinter import messagebox, filedialog
 
 root = tk.Tk()
 root.geometry("600x370")
-#root.resizable(False, False)
+root.resizable(False, False)
 root.title("YouTube Downloader v3.1.1")
 root.config(background="#448080")
+
+p1 = PhotoImage(file = "YTicon.png")
+root.iconphoto(False, p1)
 
 
 def makeMenu(w):
