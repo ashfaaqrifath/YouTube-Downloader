@@ -8,9 +8,9 @@ from tkinter import messagebox, filedialog
 
 
 root = tk.Tk()
-root.geometry("520x280")
-root.resizable(False, False)
-root.title("YouTube Downloader v3.1.0")
+root.geometry("600x370")
+#root.resizable(False, False)
+root.title("YouTube Downloader v3.1.1")
 root.config(background="#448080")
 
 
@@ -37,7 +37,7 @@ def click_menu(e):
 
 def elements():
 
-    app_banner = Label(root, text="YouTube Downloader",
+    app_banner = Label(root, text="YT Downloader",
                         padx=15,
                         pady=15,
                         bg="#448080",
@@ -49,13 +49,24 @@ def elements():
                     padx=5,
                     columnspan=3)
 
+    copyright_label = Label(root, text="Copyright © Ashfaaq Rifath - YT Downloader",
+                        padx=0,
+                        pady=0,
+                        bg="#448080",
+                        fg="white",)
+    copyright_label.grid(row=2,
+                    column=1,
+                    pady=0,
+                    padx=0,
+                    columnspan=3)
+
     yt_link = Label(root,
                         text="Enter link :",
                         bg="#00fbff",
                         pady=5,
                         padx=5,
                         font="Arial 10")
-    yt_link.grid(row=2,
+    yt_link.grid(row=3,
                     column=0,
                     pady=5,
                     padx=5)
@@ -66,7 +77,7 @@ def elements():
                             font="Arial 14")
     #tkinter copy paste
     root.linkText.bind_class("Entry", "<Button-3><ButtonRelease-3>", click_menu)
-    root.linkText.grid(row=2,
+    root.linkText.grid(row=3,
                         column=1,
                         pady=5,
                         padx=5,
@@ -78,7 +89,7 @@ def elements():
                             pady=5,
                             padx=9,
                             font="Arial 10")
-    folder_label.grid(row=3,
+    folder_label.grid(row=4,
                         column=0,
                         pady=5,
                         padx=5)
@@ -87,7 +98,7 @@ def elements():
                                     width=27,
                                     textvariable=download_path,
                                     font="Arial 14")
-    root.file_browse_text.grid(row=3,
+    root.file_browse_text.grid(row=4,
                                 column=1,
                                 pady=5,
                                 padx=5)
@@ -98,7 +109,7 @@ def elements():
                         width=10,
                         bg="salmon",
                         relief=GROOVE)
-    file_browse.grid(row=3,
+    file_browse.grid(row=4,
                     column=2,
                     pady=1,
                     padx=1)
@@ -112,7 +123,7 @@ def elements():
                         padx=15,
                         relief=GROOVE,
                         font="Arial 10")
-    mp4_button.grid(row=4,
+    mp4_button.grid(row=5,
                     column=1,
                     pady=20,
                     padx=20)
@@ -126,10 +137,35 @@ def elements():
                         padx=15,
                         relief=GROOVE,
                         font="Arial 10")
-    mp3_button.grid(row=4,
+    mp3_button.grid(row=5,
                     column=2,
                     pady=20,
-                    padx=20)
+                    padx=20,)
+
+    low_res = Radiobutton(root, text="Low resolution", variable=var, value=1, command=resolution, bg="#448080")
+    low_res.grid(row=6,
+                    column=1,)
+
+    medium_res = Radiobutton(root, text="Mudium resolution", variable=var, value=2, command=resolution, bg="#448080")
+    medium_res.grid(row=7,
+                    column=1,)
+
+    high_res = Radiobutton(root, text="High resolution", variable=var, value=3,  command=resolution, bg="#448080")
+    high_res.grid(row=8,
+                    column=1,)
+
+
+def resolution():
+    res = var.get()
+
+    if res == 1:
+        itag = 18
+    elif res == 2:
+        itag = 22
+    elif res == 3:
+        itag = 137
+
+    return itag
 
 
 def browse_file():
@@ -140,19 +176,20 @@ def browse_file():
 def download_mp4():
 
     youtube_link = link_entry.get()
+    itag = resolution()
 
     if "=" in youtube_link:
         download_folder = download_path.get()
         playlist = Playlist(youtube_link)
         for video in playlist.videos:
             print(video.title)
-            playlist_res = video.streams.get_lowest_resolution()
+            playlist_res = video.streams.get_by_itag(itag)
             playlist_res.download(download_folder)
             messagebox.showinfo("Download Success", "Downloaded playlist")
 
     download_folder = download_path.get()
     get_item = YouTube(youtube_link)
-    file_res = get_item.streams.get_lowest_resolution()
+    file_res = get_item.streams.get_by_itag(itag)
     file_res.download(download_folder)
     messagebox.showinfo("Download Success", f"Downloaded video : {get_item.title}")
 
@@ -172,6 +209,7 @@ def download_mp3():
     messagebox.showinfo("Download Success", f"Downloaded audio : {get_item.title}")
 
 
+var = IntVar()
 link_entry = StringVar()
 download_path = StringVar()
 
