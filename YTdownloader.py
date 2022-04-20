@@ -10,8 +10,8 @@ from tkinter import messagebox, filedialog
 root = tk.Tk()
 root.geometry("600x370")
 root.resizable(False, False)
-root.title("YouTube Downloader v3.1.2")
-root.config(background="#448080")
+root.title("YT Downloader v3.1.2")
+root.config(background="#a30000")
 
 p1 = PhotoImage(file = "ytd.png")
 root.iconphoto(False, p1)
@@ -25,7 +25,6 @@ def makeMenu(w):
 
 
 def click_menu(e):
-
     w = e.widget
     the_menu.entryconfigure("Copy",
     command=lambda: w.event_generate("<<Copy>>"))
@@ -38,11 +37,10 @@ def click_menu(e):
 
 
 def elements():
-
-    app_banner = Label(root, text="YT Downloader",
+    app_banner = Label(root, text="YouTube Downloader",
                         padx=15,
                         pady=15,
-                        bg="#448080",
+                        bg="#a30000",
                         fg="white",
                         font="Magneto 20 bold")
     app_banner.grid(row=1,
@@ -54,7 +52,7 @@ def elements():
     copyright_label = Label(root, text="Copyright © Ashfaaq Rifath - YT Downloader",
                         padx=0,
                         pady=0,
-                        bg="#448080",
+                        bg="#a30000",
                         fg="white",)
     copyright_label.grid(row=2,
                     column=1,
@@ -144,15 +142,15 @@ def elements():
                     pady=20,
                     padx=20,)
 
-    low_res = Radiobutton(root, text="Low resolution", variable=var, value=1, command=resolution, bg="#448080")
+    low_res = Radiobutton(root, text="Low resolution", variable=var, value=1, command=resolution, bg="#a30000", font="Arial 10")
     low_res.grid(row=6,
                     column=1,)
 
-    medium_res = Radiobutton(root, text="Mudium resolution", variable=var, value=2, command=resolution, bg="#448080")
+    medium_res = Radiobutton(root, text="Mudium resolution", variable=var, value=2, command=resolution, bg="#a30000", font="Arial 10")
     medium_res.grid(row=7,
                     column=1,)
 
-    high_res = Radiobutton(root, text="High resolution", variable=var, value=3,  command=resolution, bg="#448080")
+    high_res = Radiobutton(root, text="High resolution", variable=var, value=3,  command=resolution, bg="#a30000", font="Arial 10")
     high_res.grid(row=8,
                     column=1,)
 
