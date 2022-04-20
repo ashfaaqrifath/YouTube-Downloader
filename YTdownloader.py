@@ -1,6 +1,7 @@
 from pytube import YouTube
 from pytube import Playlist
 from moviepy.editor import VideoFileClip
+import webbrowser
 import os
 import tkinter as tk
 from tkinter import *
@@ -10,7 +11,7 @@ from tkinter import messagebox, filedialog
 root = tk.Tk()
 root.geometry("600x370")
 root.resizable(False, False)
-root.title("YT Downloader v3.1.2")
+root.title("YT Downloader v3.2.1")
 root.config(background="#a30000")
 
 p1 = PhotoImage(file = "ytd.png")
@@ -34,6 +35,9 @@ def click_menu(e):
 
     the_menu.tk.call("tk_popup", the_menu, e.x_root, e.y_root)
 
+
+def callback(url):
+    webbrowser.open_new_tab(url)
 
 
 def elements():
@@ -154,17 +158,21 @@ def elements():
     high_res.grid(row=8,
                     column=1,)
 
+    github_link = Label(root, text="GitHub", font="Arial 10", fg="white", bg="#a30000", cursor="hand2")
+    github_link.grid(row=8,
+                    column=2,)
+    github_link.bind("<Button-1>", lambda e:
+    callback("https://github.com/ashfaaqrifath/YouTube-Downloader"))
+
 
 def resolution():
     res = var.get()
-
     if res == 1:
         itag = 18
     elif res == 2:
         itag = 22
     elif res == 3:
         itag = 137
-
     return itag
 
 
@@ -174,37 +182,43 @@ def browse_file():
 
 
 def download_mp4():
-    youtube_link = link_entry.get()
-    itag = resolution()
+    try:
+        youtube_link = link_entry.get()
+        itag = resolution()
 
-    if "=" in youtube_link:
+        if "=" in youtube_link:
+            download_folder = download_path.get()
+            playlist = Playlist(youtube_link)
+            for video in playlist.videos:
+                print(video.title)
+                playlist_res = video.streams.get_by_itag(itag)
+                playlist_res.download(download_folder)
+                messagebox.showinfo("Download Success", "Downloaded playlist")
+
         download_folder = download_path.get()
-        playlist = Playlist(youtube_link)
-        for video in playlist.videos:
-            print(video.title)
-            playlist_res = video.streams.get_by_itag(itag)
-            playlist_res.download(download_folder)
-            messagebox.showinfo("Download Success", "Downloaded playlist")
-
-    download_folder = download_path.get()
-    get_item = YouTube(youtube_link)
-    file_res = get_item.streams.get_by_itag(itag)
-    file_res.download(download_folder)
-    messagebox.showinfo("Download Success", f"Downloaded video : {get_item.title}")
+        get_item = YouTube(youtube_link)
+        file_res = get_item.streams.get_by_itag(itag)
+        file_res.download(download_folder)
+        messagebox.showinfo("Download Success", f"Downloaded video : {get_item.title}")
+    except:
+        messagebox.showerror("Invalid Link", "Enter valid link")
 
 
 def download_mp3():
-    youtube_link = link_entry.get()
-    download_folder = download_path.get()
-    get_item = YouTube(youtube_link)
-    file_res = get_item.streams.get_lowest_resolution()
-    file_Convert = file_res.download(download_folder)
+    try:
+        youtube_link = link_entry.get()
+        download_folder = download_path.get()
+        get_item = YouTube(youtube_link)
+        file_res = get_item.streams.get_lowest_resolution()
+        file_Convert = file_res.download(download_folder)
 
-    video = VideoFileClip(file_Convert)
-    video.audio.write_audiofile(file_Convert[:-4] + ".mp3")
-    video.close()
-    os.remove(file_Convert)
-    messagebox.showinfo("Download Success", f"Downloaded audio : {get_item.title}")
+        video = VideoFileClip(file_Convert)
+        video.audio.write_audiofile(file_Convert[:-4] + ".mp3")
+        video.close()
+        os.remove(file_Convert)
+        messagebox.showinfo("Download Success", f"Downloaded audio : {get_item.title}")
+    except:
+        messagebox.showerror("Invalid Link", "Enter valid link")
 
 
 var = IntVar()
