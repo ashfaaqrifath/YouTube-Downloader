@@ -10,15 +10,14 @@ from tkinter import messagebox, filedialog
 root = tk.Tk()
 root.geometry("600x370")
 root.resizable(False, False)
-root.title("YouTube Downloader v3.1.1")
+root.title("YouTube Downloader v3.1.2")
 root.config(background="#448080")
 
-p1 = PhotoImage(file = "YTicon.png")
+p1 = PhotoImage(file = "ytd.png")
 root.iconphoto(False, p1)
 
 
 def makeMenu(w):
-
     global the_menu
     the_menu = tk.Menu(w, tearoff=0)
     the_menu.add_command(label="Copy")
@@ -177,7 +176,6 @@ def browse_file():
 
 
 def download_mp4():
-
     youtube_link = link_entry.get()
     itag = resolution()
 
@@ -198,7 +196,6 @@ def download_mp4():
 
 
 def download_mp3():
-
     youtube_link = link_entry.get()
     download_folder = download_path.get()
     get_item = YouTube(youtube_link)
