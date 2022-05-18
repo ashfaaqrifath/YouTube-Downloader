@@ -1,5 +1,5 @@
 # YouTube-Downloader
-A simple python gui program that is able to download YouTube videos or playlists in mp4 or mp3 format in any resolution.
+A python gui application that is able to download YouTube videos or playlists in mp4 or mp3 format in any resolution.
 
 - WARNING: DOWNLOADING COPYRIGHTED MATERIAL IS ILLEGAL! I DO NOT TAKE ANY RESPONSIBILITY FOR YOUR USAGE OF THIS TOOL! THIS IS A PERSONAL PROJECT BIULT FOR EDUCATIONAL PURPOSES.
 
