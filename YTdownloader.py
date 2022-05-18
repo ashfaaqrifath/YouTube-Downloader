@@ -11,7 +11,7 @@ from tkinter import messagebox, filedialog
 root = tk.Tk()
 root.geometry("600x370")
 root.resizable(False, False)
-root.title("YT Downloader v3.2.1")
+root.title("YT Downloader v3.2.2")
 root.config(background="#a30000")
 
 p1 = PhotoImage(file = "ytd.png")
