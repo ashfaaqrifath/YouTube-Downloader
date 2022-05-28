@@ -229,3 +229,8 @@ elements()
 makeMenu(root)
 
 root.mainloop()
+
+
+
+
+# <<< Copyright (c) 2022 Ashfaaq Rifath - YT Downloader >>>
