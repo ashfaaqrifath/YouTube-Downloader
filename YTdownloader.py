@@ -89,7 +89,7 @@ def elements():
                         columnspan=2)
 
     folder_label = Label(root,
-                            text="Folder :",
+                            text="Save to :",
                             bg="#00fbff",
                             pady=5,
                             padx=9,
@@ -127,7 +127,7 @@ def elements():
                         pady=10,
                         padx=15,
                         relief=GROOVE,
-                        font="Arial 10")
+                        font="Arial 10 bold")
     mp4_button.grid(row=5,
                     column=1,
                     pady=20,
@@ -141,21 +141,21 @@ def elements():
                         pady=10,
                         padx=15,
                         relief=GROOVE,
-                        font="Arial 10")
+                        font="Arial 10 bold")
     mp3_button.grid(row=5,
                     column=2,
                     pady=20,
                     padx=20,)
 
-    low_res = Radiobutton(root, text="Low resolution", variable=var, value=1, command=resolution, bg="#a30000", font="Arial 10")
+    low_res = Radiobutton(root, text="Low resolution", variable=var, value=1, command=resolution, bg="#a30000", font="Arial 10 italic bold")
     low_res.grid(row=6,
                     column=1,)
 
-    medium_res = Radiobutton(root, text="Mudium resolution", variable=var, value=2, command=resolution, bg="#a30000", font="Arial 10")
+    medium_res = Radiobutton(root, text="Mudium resolution", variable=var, value=2, command=resolution, bg="#a30000", font="Arial 10 italic bold")
     medium_res.grid(row=7,
                     column=1,)
 
-    high_res = Radiobutton(root, text="High resolution", variable=var, value=3,  command=resolution, bg="#a30000", font="Arial 10")
+    high_res = Radiobutton(root, text="High resolution", variable=var, value=3,  command=resolution, bg="#a30000", font="Arial 10 italic bold")
     high_res.grid(row=8,
                     column=1,)
 
