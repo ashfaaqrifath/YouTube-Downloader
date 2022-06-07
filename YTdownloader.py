@@ -119,63 +119,7 @@ def elements():
                     pady=1,
                     padx=1)
 
-    mp4_button = Button(root,
-                        text="Download mp4",
-                        command=download_mp4,
-                        width=10,
-                        bg="#1fab00",
-                        pady=10,
-                        padx=15,
-                        relief=GROOVE,
-                        font="Arial 10 bold")
-    mp4_button.grid(row=5,
-                    column=1,
-                    pady=20,
-                    padx=20)
-
-    mp3_button = Button(root,
-                        text="Download mp3",
-                        command=download_mp3,
-                        width=10,
-                        bg="#ffc800",
-                        pady=10,
-                        padx=15,
-                        relief=GROOVE,
-                        font="Arial 10 bold")
-    mp3_button.grid(row=5,
-                    column=2,
-                    pady=20,
-                    padx=20,)
-
-    low_res = Radiobutton(root, text="Low resolution", variable=var, value=1, command=resolution, bg="#a30000", font="Arial 10 italic bold")
-    low_res.grid(row=6,
-                    column=1,)
-
-    medium_res = Radiobutton(root, text="Mudium resolution", variable=var, value=2, command=resolution, bg="#a30000", font="Arial 10 italic bold")
-    medium_res.grid(row=7,
-                    column=1,)
-
-    high_res = Radiobutton(root, text="High resolution", variable=var, value=3,  command=resolution, bg="#a30000", font="Arial 10 italic bold")
-    high_res.grid(row=8,
-                    column=1,)
-
-    github_link = Label(root, text="GitHub", font="Arial 10", fg="white", bg="#a30000", cursor="hand2")
-    github_link.grid(row=8,
-                    column=2,)
-    github_link.bind("<Button-1>", lambda e:
-    callback("https://github.com/ashfaaqrifath/YouTube-Downloader"))
-
-
-def resolution():
-    res = var.get()
-    if res == 1:
-        itag = 18
-    elif res == 2:
-        itag = 22
-    elif res == 3:
-        itag = 137
-    return itag
-
+    m
 
 def browse_file():
     download_Directory = filedialog.askdirectory()
