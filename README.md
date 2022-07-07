@@ -56,5 +56,6 @@ Copyright © 2022 Ashfaaq Rifath [![MIT License](https://img.shields.io/apm/l/at
 
 
 ##
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
+<h1 align="center">
+  <img width="300" src="https://ashfaaqrifath.github.io/aqlogo9.png" alt="Ashfaaq">
+</h1>
