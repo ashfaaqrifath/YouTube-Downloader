@@ -54,7 +54,7 @@ Download the [YTdownloader.exe](https://github.com/ashfaaqrifath/YouTube-Downloa
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-Copyright © 2022 Ashfaaq Rifath 
+Copyright © 2022 Ashfaaq Rifath - YT Downloader
 
 ##
 <h1 align="center">
