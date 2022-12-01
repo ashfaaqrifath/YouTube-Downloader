@@ -20,11 +20,6 @@ A python gui application that is able to download YouTube videos or playlists in
   pip install moviepy
 ```
 
-* Colorama
-```
-  pip install colorama
-```
-
 * Tkinter (Built-in)
 ```
   pip install tkinter
